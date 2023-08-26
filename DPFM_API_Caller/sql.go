@@ -4,35 +4,50 @@ import (
 	dpfm_api_input_reader "data-platform-api-product-master-doc-reads-rmq-kube/DPFM_API_Input_Reader"
 	dpfm_api_output_formatter "data-platform-api-product-master-doc-reads-rmq-kube/DPFM_API_Output_Formatter"
 	"fmt"
+	"github.com/latonaio/golang-logging-library-for-data-platform/logger"
 )
 
 func (c *DPFMAPICaller) readSqlProcess(
 	input *dpfm_api_input_reader.SDC,
+	output *dpfm_api_output_formatter.SDC,
+	accepter []string,
 	errs *[]error,
+	log *logger.Logger,
 ) interface{} {
-	headerDoc := c.HeaderDoc(input, errs)
+	var generalDoc *[]dpfm_api_output_formatter.GeneralDoc
+
+	for _, fn := range accepter {
+		switch fn {
+		case "GeneralDoc":
+			func() {
+				generalDoc = c.GeneralDoc(input, output, errs, log)
+			}()
+		}
+	}
 
 	data := &dpfm_api_output_formatter.Message{
-		HeaderDoc: headerDoc,
+		GeneralDoc: generalDoc,
 	}
 
 	return data
 }
 
-func (c *DPFMAPICaller) HeaderDoc(
+func (c *DPFMAPICaller) GeneralDoc(
 	input *dpfm_api_input_reader.SDC,
+	output *dpfm_api_output_formatter.SDC,
 	errs *[]error,
-) *[]dpfm_api_output_formatter.HeaderDoc {
+	log *logger.Logger,
+) *[]dpfm_api_output_formatter.GeneralDoc {
 	where := "WHERE 1 = 1"
 
-	if input.Header.Product != nil && len(*input.Header.Product) != 0 {
-		where = fmt.Sprintf("%s\nAND Product = '%v'", where, *input.Header.Product)
+	if input.GeneralDoc.Product != nil && len(*input.GeneralDoc.Product) != 0 {
+		where = fmt.Sprintf("%s\nAND Product = '%v'", where, *input.GeneralDoc.Product)
 	}
-	if input.Header.HeaderDoc.DocType != nil && len(*input.Header.HeaderDoc.DocType) != 0 {
-		where = fmt.Sprintf("%s\nAND DocType = '%v'", where, *input.Header.HeaderDoc.DocType)
+	if input.GeneralDoc.DocType != nil && len(*input.GeneralDoc.DocType) != 0 {
+		where = fmt.Sprintf("%s\nAND DocType = '%v'", where, *input.GeneralDoc.DocType)
 	}
-	if input.Header.HeaderDoc.DocIssuerBusinessPartner != nil && *input.Header.HeaderDoc.DocIssuerBusinessPartner != 0 {
-		where = fmt.Sprintf("%s\nAND DocIssuerBusinessPartner = %v", where, *input.Header.HeaderDoc.DocIssuerBusinessPartner)
+	if input.GeneralDoc.DocIssuerBusinessPartner != nil && *input.GeneralDoc.DocIssuerBusinessPartner != 0 {
+		where = fmt.Sprintf("%s\nAND DocIssuerBusinessPartner = %v", where, *input.GeneralDoc.DocIssuerBusinessPartner)
 	}
 	groupBy := "\nGROUP BY Product, DocType, DocIssuerBusinessPartner "
 
@@ -47,7 +62,7 @@ func (c *DPFMAPICaller) HeaderDoc(
 	}
 	defer rows.Close()
 
-	data, err := dpfm_api_output_formatter.ConvertToHeaderDoc(rows)
+	data, err := dpfm_api_output_formatter.ConvertToGeneralDoc(rows)
 	if err != nil {
 		*errs = append(*errs, err)
 		return nil

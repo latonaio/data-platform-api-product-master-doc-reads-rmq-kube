@@ -5,14 +5,14 @@ import (
 	"fmt"
 )
 
-func ConvertToHeaderDoc(rows *sql.Rows) (*[]HeaderDoc, error) {
+func ConvertToGeneralDoc(rows *sql.Rows) (*[]GeneralDoc, error) {
 	defer rows.Close()
-	headerDoc := make([]HeaderDoc, 0)
+	generalDoc := make([]GeneralDoc, 0)
 
 	i := 0
 	for rows.Next() {
 		i++
-		pm := &HeaderDoc{}
+		pm := &GeneralDoc{}
 
 		err := rows.Scan(
 			&pm.Product,
@@ -26,11 +26,11 @@ func ConvertToHeaderDoc(rows *sql.Rows) (*[]HeaderDoc, error) {
 		)
 		if err != nil {
 			fmt.Printf("err = %+v \n", err)
-			return &headerDoc, err
+			return &generalDoc, err
 		}
 
 		data := pm
-		headerDoc = append(headerDoc, HeaderDoc{
+		generalDoc = append(generalDoc, GeneralDoc{
 			Product:                  data.Product,
 			DocType:                  data.DocType,
 			DocVersionID:             data.DocVersionID,
@@ -43,8 +43,8 @@ func ConvertToHeaderDoc(rows *sql.Rows) (*[]HeaderDoc, error) {
 	}
 	if i == 0 {
 		fmt.Printf("DBに対象のレコードが存在しません。")
-		return &headerDoc, nil
+		return &generalDoc, nil
 	}
 
-	return &headerDoc, nil
+	return &generalDoc, nil
 }

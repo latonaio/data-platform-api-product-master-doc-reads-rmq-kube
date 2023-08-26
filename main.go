@@ -76,7 +76,8 @@ func callProcess(rmq *rabbitmq.RabbitmqClient, caller *dpfm_api_caller.DPFMAPICa
 		return
 	}
 
-	res, errs := caller.AsyncReads(&input)
+	accepter := getAccepter(&input)
+	res, errs := caller.AsyncReads(accepter, &input, &output, l)
 
 	if len(errs) != 0 {
 		for _, err := range errs {
@@ -103,6 +104,22 @@ func callProcess(rmq *rabbitmq.RabbitmqClient, caller *dpfm_api_caller.DPFMAPICa
 	//rmq.Send("data-platform-api-request-reads-cache-manager-receive-queue", output)
 
 	return nil
+}
+
+func getAccepter(input *dpfm_api_input_reader.SDC) []string {
+	accepter := input.Accepter
+	if len(input.Accepter) == 0 {
+		accepter = []string{"All"}
+	}
+
+	if accepter[0] == "All" {
+		accepter = []string{
+			"GeneralDoc",
+			"BusinessPartnerDoc",
+			"BPPlantDoc",
+		}
+	}
+	return accepter
 }
 
 func getBoolPtr(b bool) *bool {

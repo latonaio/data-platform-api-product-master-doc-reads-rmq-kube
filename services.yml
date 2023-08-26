@@ -9,12 +9,12 @@ spec:
   selector:
     matchLabels:
       run: data-platform-api-product-master-doc-reads-rmq-kube
-      app: ORDERS
+      app: PRODUCT_MASTER_DOC
   template:
     metadata:
       labels:
         run: data-platform-api-product-master-doc-reads-rmq-kube
-        app: ORDERS
+        app: PRODUCT_MASTER_DOC
     spec:
       nodeName: worker
       hostname: data-platform-api-product-master-doc-reads-rmq-kube

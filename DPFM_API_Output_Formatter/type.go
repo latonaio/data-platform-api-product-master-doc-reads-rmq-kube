@@ -25,10 +25,10 @@ type SDC struct {
 }
 
 type Message struct {
-	HeaderDoc *[]HeaderDoc `json:"HeaderDoc"`
+	GeneralDoc *[]GeneralDoc `json:"GeneralDoc"`
 }
 
-type HeaderDoc struct {
+type GeneralDoc struct {
 	Product                  string `json:"Product"`
 	DocType                  string `json:"DocType"`
 	FileExtension            string `json:"FileExtension"`

@@ -9,7 +9,7 @@
   "service_label": "PRODUCT_MASTER_DOC",
   "api_type": "reads",
   "message": {
-    "HeaderDoc": [
+    "GeneralDoc": [
       {
         "Product": "A3750",
         "DocType": "IMAGE",
@@ -19,102 +19,20 @@
         "DocIssuerBusinessPartner": 101,
         "FilePath": "/volume/101",
         "FileName": "パン_商品画像_20221216_0001"
-      },
-      {
-        "Product": "A3751",
-        "DocType": "IMAGE",
-        "FileExtension": "png",
-        "DocVersionID": 1,
-        "DocID": "b860eede61d99711b2104ca0234e89dd182c9b602c3d59625725c59241311e47",
-        "DocIssuerBusinessPartner": 101,
-        "FilePath": "/volume/101",
-        "FileName": "ランチパックツナマヨネーズ"
-      },
-      {
-        "Product": "A4824",
-        "DocType": "IMAGE",
-        "FileExtension": "png",
-        "DocVersionID": 1,
-        "DocID": "1481c59448cbb1eea365be7d9f4369beb64fed721071ef53ed7d8b392b2dab08",
-        "DocIssuerBusinessPartner": 101,
-        "FilePath": "/volume/101",
-        "FileName": "ダブルソフト"
-      },
-      {
-        "Product": "A4906",
-        "DocType": "IMAGE",
-        "FileExtension": "png",
-        "DocVersionID": 1,
-        "DocID": "e124caca3c5fa594fcd56f0d99e5ed5a1f6ff77e604172f7d07bca66e805ebd1",
-        "DocIssuerBusinessPartner": 101,
-        "FilePath": "/volume/101",
-        "FileName": "まるごとバナナ"
-      },
-      {
-        "Product": "B143",
-        "DocType": "IMAGE",
-        "FileExtension": "png",
-        "DocVersionID": 1,
-        "DocID": "352bf3d0b3d420263835234a86b64b4d34a47b81b692c430e56210c0d8a68a46",
-        "DocIssuerBusinessPartner": 101,
-        "FilePath": "/volume/101",
-        "FileName": "手巻おにぎり熟成紅鮭"
-      },
-      {
-        "Product": "B144",
-        "DocType": "IMAGE",
-        "FileExtension": "png",
-        "DocVersionID": 1,
-        "DocID": "00abe80669c4b8d0e387e541560fb628edc4a41b58cf7aaa26184ea65319ad6e",
-        "DocIssuerBusinessPartner": 101,
-        "FilePath": "/volume/101",
-        "FileName": "手巻おにぎり追い鰹製法おかか"
-      },
-      {
-        "Product": "E514",
-        "DocType": "IMAGE",
-        "FileExtension": "png",
-        "DocVersionID": 1,
-        "DocID": "d0ba67a778a6d2fa79a07c69c4da74a64041fc3467101b9bc463f36dfe92df83",
-        "DocIssuerBusinessPartner": 101,
-        "FilePath": "/volume/101",
-        "FileName": "烏龍茶"
-      },
-      {
-        "Product": "E6205",
-        "DocType": "IMAGE",
-        "FileExtension": "png",
-        "DocVersionID": 1,
-        "DocID": "aec6d7b56d6a9f814fcc7026b6f6a096598fedfa9241ed6390ee1e3ea89ef3db",
-        "DocIssuerBusinessPartner": 101,
-        "FilePath": "/volume/101",
-        "FileName": "緑茶"
-      },
-      {
-        "Product": "I3921",
-        "DocType": "IMAGE",
-        "FileExtension": "png",
-        "DocVersionID": 1,
-        "DocID": "9bf416b4fcd03cc906686e438d153eb41e97b95fb47e127eb28bb2340d622b33",
-        "DocIssuerBusinessPartner": 101,
-        "FilePath": "/volume/101",
-        "FileName": "アルフォートミニチョコレート"
-      },
-      {
-        "Product": "W999",
-        "DocType": "IMAGE",
-        "FileExtension": "png",
-        "DocVersionID": 1,
-        "DocID": "5223982e999aee07a7737a5cb493d83c4638c8b7e2e3f98d4e1e41bb6e7a813e",
-        "DocIssuerBusinessPartner": 101,
-        "FilePath": "/volume/101",
-        "FileName": "からあげクン"
       }
     ]
   },
-  "api_schema": "ProductMasterDocReads",
+  "api_schema": "ProduerDocReads",
   "accepter": [
-    "HeaderDoc"
+    "GeneralDoc"
   ],
-  "deleted": false
+  "deleted": false,
+  "sql_update_result": null,
+  "sql_update_error": "",
+  "subfunc_result": null,
+  "subfunc_error": "",
+  "exconf_result": null,
+  "exconf_error": "",
+  "api_processing_result": true,
+  "api_processing_error": ""
 }
